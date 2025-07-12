@@ -23,7 +23,7 @@ const wss = new WebSocketServer({ server })
 // Middleware
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://127.0.0.1:3000"], // Allow your Next.js dev server
+    origin: ["http://localhost:3000", "http://127.0.0.1:3000", "https://yena-bingo.onrender.com"], // Allow your Next.js dev server and deployed frontend
     credentials: true,
   }),
 )
@@ -232,7 +232,7 @@ const PORT = process.env.PORT || 3001
 
 server.listen(PORT, () => {
   console.log(`🚀 SETB Bingo Server running on port ${PORT}`)
-  console.log(`📡 WebSocket server ready at ws://localhost:${PORT}`)
+  console.log(`📡 WebSocket server ready at wss://web-service-8dz5.onrender.com`) // Updated for deployed URL
   console.log(`🌐 HTTP server ready at http://localhost:${PORT}`)
   console.log(`🎮 Game rooms initialized: ${gameState.rooms.size}`)
   console.log(`👥 Connected players: ${gameState.players.size}`)
