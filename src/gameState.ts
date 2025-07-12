@@ -120,6 +120,14 @@ export function leaveRoom(playerId: string, roomId: number): boolean {
     }
   }
 
+  // Reset room state when no players are left
+  if (room.connectedPlayers.size === 0) {
+    room.status = "waiting"
+    room.prize = 0
+    room.activeGames = 0
+    console.log(`Room ${roomId} reset to initial state - no players remaining`)
+  }
+
   if (player.currentRoom === roomId) {
     player.currentRoom = undefined
   }
