@@ -11,9 +11,9 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "sourceMap": true,
-    "types": ["node"], // Keep this to include Node.js types
-    "lib": ["es2020"] // More appropriate for a Node.js server
-    // Removed: "noEmit", "allowJs", "isolatedModules", "jsx", "incremental", "plugins", "paths"
+    "types": ["node"],
+    "typeRoots": ["./node_modules/@types"], // Added this line
+    "lib": ["es2020"]
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
