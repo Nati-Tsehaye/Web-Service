@@ -12,8 +12,8 @@
     "resolveJsonModule": true,
     "sourceMap": true,
     "types": ["node"],
-    "typeRoots": ["./node_modules/@types"], // Added this line
-    "lib": ["es2020"]
+    "typeRoots": ["./node_modules/@types"], // Explicitly tell TypeScript where to find types
+    "lib": ["es2020"] // Appropriate for a Node.js server
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
