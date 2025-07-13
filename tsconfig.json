@@ -1,31 +1,19 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
     "target": "es2020",
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext", // Changed from "commonjs" to "esnext"
+    "module": "esnext",
     "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "paths": {
-      "@/*": ["./*"]
-    },
     "outDir": "./dist",
     "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
     "sourceMap": true,
-    "types": ["node"]
+    "types": ["node"], // Keep this to include Node.js types
+    "lib": ["es2020"] // More appropriate for a Node.js server
+    // Removed: "noEmit", "allowJs", "isolatedModules", "jsx", "incremental", "plugins", "paths"
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
