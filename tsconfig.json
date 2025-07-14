@@ -1,19 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es2020",
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "outDir": "./dist",
+    "target": "es2022",
+    "module": "node16",
     "rootDir": "./src",
-    "strict": true,
+    "outDir": "./dist",
     "esModuleInterop": true,
+    "strict": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "sourceMap": true,
-    "types": ["node"],
-    "typeRoots": ["./node_modules/@types"], // Explicitly tell TypeScript where to find types
-    "lib": ["es2020"] // Appropriate for a Node.js server
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]

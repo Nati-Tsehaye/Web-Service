@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "SETB Bingo WebSocket Server",
   "main": "dist/server.js",
+  "type": "module",
   "scripts": {
     "build": "npm run clean && tsc",
     "clean": "rimraf dist",

@@ -1,4 +1,4 @@
-import type { GameRoom, ServerState, GameRoomClient } from "./types"
+import type { GameRoom, ServerState, GameRoomClient } from "./types.js" // Added .js
 
 // Initialize game rooms with default data
 const initialRooms: GameRoom[] = [
@@ -58,7 +58,8 @@ initialRooms.forEach((room) => {
 })
 
 export function getRoomsArray(): GameRoomClient[] {
-  return Array.from(gameState.rooms.values()).map((room) => ({
+  return Array.from(gameState.rooms.values()).map((room: GameRoom) => ({
+    // Explicitly typed room as GameRoom
     id: room.id,
     stake: room.stake,
     players: room.players,
