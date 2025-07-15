@@ -14,6 +14,8 @@ import {
   getPlayerByWebSocket,
   selectBoard,
   startGameInRoom,
+  stopNumberCalling,
+  handleBingoWin, // Import new function
 } from "./gameState.js" // Added .js
 
 const app = express()
@@ -82,6 +84,15 @@ wss.on("connection", (ws, req) => {
     console.log("🔌 WebSocket connection closed")
     const playerId = getPlayerByWebSocket(ws)
     if (playerId) {
+      const player = gameState.players.get(playerId)
+      if (player && player.currentRoom) {
+        // Check if this was the last player in an active game
+        const room = gameState.rooms.get(player.currentRoom)
+        if (room && room.connectedPlayers.size === 1 && room.status === "active") {
+          // Stop number calling if this was the last player
+          stopNumberCalling(player.currentRoom)
+        }
+      }
       removePlayer(playerId)
       broadcastRoomUpdate()
     }
@@ -190,10 +201,21 @@ function handleWebSocketMessage(ws: any, message: WebSocketMessage) {
         const success = startGameInRoom(message.roomId)
         if (success) {
           console.log(`✅ Game started in room ${message.roomId}`)
-          broadcastRoomUpdate()
         } else {
           console.log(`❌ Failed to start game in room ${message.roomId}`)
           sendError(ws, "Failed to start game.")
+        }
+      }
+      break
+
+    case "bingo_won": // New case for BINGO claim
+      if (message.roomId) {
+        const success = handleBingoWin(message.roomId, playerIdToUse)
+        if (success) {
+          console.log(`✅ BINGO claimed by ${playerIdToUse} in room ${message.roomId}`)
+        } else {
+          console.log(`❌ Failed to process BINGO claim by ${playerIdToUse} in room ${message.roomId}`)
+          sendError(ws, "Failed to claim BINGO.")
         }
       }
       break
@@ -204,7 +226,8 @@ function handleWebSocketMessage(ws: any, message: WebSocketMessage) {
   }
 }
 
-function broadcastRoomUpdate() {
+export function broadcastRoomUpdate() {
+  // Exported for use in gameState.ts
   const message: WebSocketMessage = {
     type: "room_update",
     rooms: getRoomsArray(),
